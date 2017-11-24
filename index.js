@@ -75,4 +75,8 @@ module.exports = class Query {
         .join("&")
     );
   }
+
+  toJSON() {
+    return this.fields;
+  }
 };

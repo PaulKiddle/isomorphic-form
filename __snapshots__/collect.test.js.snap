@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collects elements 1`] = `
+Array [
+  Array [
+    "b",
+    "2",
+  ],
+  Array [
+    "c",
+    "3",
+  ],
+  Array [
+    "d",
+    "4.1",
+  ],
+  Array [
+    "d",
+    "4.2",
+  ],
+  Array [
+    "e",
+    "5",
+  ],
+  Array [
+    "f",
+    "on",
+  ],
+  Array [
+    "g",
+    "7",
+  ],
+  Array [
+    "h",
+    "on",
+  ],
+  Array [
+    "i",
+    "",
+  ],
+  Array [
+    "j",
+    "10",
+  ],
+  Array [
+    "k",
+    "ltr",
+  ],
+  Array [
+    "l",
+    "12",
+  ],
+  Array [
+    "m",
+    "rtl",
+  ],
+]
+`;
+
+exports[`it includes submitter value 1`] = `
+Array [
+  Array [
+    "a",
+    "1",
+  ],
+]
+`;
