@@ -5,8 +5,10 @@ module.exports = callback => form => {
 
   const doCollect = e => {
     const data = collect(form, submitter);
-    callback(data);
-    e.preventDefault();
+
+    if (callback(data, form.method, new Url(form.action)) !== false) {
+      e.preventDefault();
+    }
   };
 
   const captureSubmitter = e => {

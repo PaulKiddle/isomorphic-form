@@ -1,5 +1,7 @@
 const submit = require("./form");
 
+global.Url = require("url").URL;
+
 test("it adds a callback", () => {
   const jcb = jest.fn();
   const cb = data => jcb(data.toString());
@@ -10,6 +12,8 @@ test("it adds a callback", () => {
     <input name=b value=2>
     <button name='c' value=3>3</button>
   `;
+  form.method = "GET";
+  form.action = "http://example.com";
 
   document.body.appendChild(form);
 
