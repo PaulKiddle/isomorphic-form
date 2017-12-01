@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest": "^21.2.1"
+    "busboy": "^0.2.14"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "mock-req": "^0.2.0"
   }
 }
