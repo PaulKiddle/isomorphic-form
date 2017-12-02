@@ -1,4 +1,4 @@
-const Query = require(".");
+import Query from "./index";
 
 test("It parses query strings", () => {
   const q = new Query("?a=b");

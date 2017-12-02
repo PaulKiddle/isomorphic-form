@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node test | faucet"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,11 @@
     "busboy": "^0.2.14"
   },
   "devDependencies": {
-    "jest": "^21.2.1",
-    "mock-req": "^0.2.0"
+    "faucet": "0.0.1",
+    "jsdom": "^11.5.1",
+    "mock-req": "^0.2.0",
+    "rollup": "^0.52.0",
+    "sinon": "^4.1.2",
+    "tape": "^4.8.0"
   }
 }

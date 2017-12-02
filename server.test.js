@@ -1,4 +1,4 @@
-const parse = require("./server");
+import parse from "./server";
 const MockReq = require("mock-req");
 
 test("It parses form fields", () => {

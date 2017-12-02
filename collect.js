@@ -1,14 +1,15 @@
-const Query = require(".");
+import Query from "./index";
+
 const isButton = el => /^button|submit|image$/.test(el.type);
 const closest = (el, elName) => {
   while (el && el.nodeName.toLowerCase() !== elName) el = el.parentNode;
   return el;
 };
 
-module.exports = function collect(form, submitter) {
+export default function collect(form, submitter) {
   const data = new Query();
 
-  for (field of form.elements) {
+  for (let field of form.elements) {
     if (
       closest(field, "datalist") ||
       field.disabled ||
@@ -29,7 +30,7 @@ module.exports = function collect(form, submitter) {
     }
 
     if (/^select-(one|multiple)$/.test(type)) {
-      for (option of field.options) {
+      for (let option of field.options) {
         if (option.selected && !option.disabled) {
           data.append(name, option.value);
         }
@@ -53,4 +54,4 @@ module.exports = function collect(form, submitter) {
   }
 
   return data;
-};
+}

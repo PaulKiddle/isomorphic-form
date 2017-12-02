@@ -1,4 +1,4 @@
-const submit = require("./form");
+import submit from "./form";
 
 global.Url = require("url").URL;
 
@@ -34,7 +34,6 @@ test("it adds a callback", () => {
   remover();
 
   prevented = dispatchSubmit(form.elements.c);
-
   expect(jcb).not.toHaveBeenCalled();
   expect(prevented).toBe(false);
 });

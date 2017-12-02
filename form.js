@@ -1,6 +1,6 @@
-const collect = require("./collect");
+import collect from "./collect";
 
-module.exports = callback => form => {
+export default callback => form => {
   let submitter = null;
 
   const doCollect = e => {

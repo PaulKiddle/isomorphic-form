@@ -1,8 +1,8 @@
+import Bucket from "./index";
 const Busboy = require("busboy");
-const Bucket = require("./index");
 const Url = require("url");
 
-module.exports = req => {
+export default req => {
   if (req.method === "GET") {
     const { query } = Url.parse(req.url);
     return Promise.resolve(Bucket.fromString(query));

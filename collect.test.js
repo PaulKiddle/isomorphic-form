@@ -1,4 +1,4 @@
-const collect = require("./collect.js");
+import collect from "./collect.js";
 
 test("Collect returns query", () => {
   const form = document.createElement("form");

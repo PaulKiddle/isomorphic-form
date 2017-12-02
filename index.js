@@ -2,7 +2,7 @@ const hasKey = key => ([k]) => k === key;
 const notKey = key => ([k]) => k !== key;
 const hasPair = (key, val) => ([k, v]) => k === key && v == val;
 
-module.exports = class Query {
+export default class Query {
   constructor(fields = []) {
     if (Array.isArray(fields)) {
       this.fields = fields;
@@ -79,4 +79,4 @@ module.exports = class Query {
   toJSON() {
     return this.fields;
   }
-};
+}
