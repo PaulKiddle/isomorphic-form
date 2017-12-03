@@ -1,13 +1,14 @@
 {
-  "name": "form",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "universal-form",
+  "version": "0.1.0",
+  "description": "Isomorphic HTML form that works on the client and the server",
+  "main": "src/server.js",
+  "browser": "src/form.js",
   "scripts": {
     "start": "cd example && rollup index.js -f cjs | node",
     "test": "node test | faucet"
   },
-  "author": "",
+  "author": "Paul Kiddle",
   "license": "ISC",
   "dependencies": {
     "busboy": "^0.2.14",
