@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "busboy": "^0.2.14"
+    "busboy": "^0.2.14",
+    "file-api": "^0.10.4"
   },
   "devDependencies": {
     "express": "^4.16.2",

@@ -6,25 +6,27 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const rollup = require("rollup");
+const FileReader = require("file-api").FileReader;
 const app = express();
 
 app.use((req, res, next) => {
-  const route = resolve(req.path, req.method);
+  const route = resolve(FileReader)(req.path, req.method);
 
   if (!route) {
     return next();
   }
 
-  Promise.resolve(parse(req)).then(data => {
-    const page = route(data);
+  Promise.resolve(parse(req))
+    .then(route)
+    .then(page => {
+      if (page.redirect) {
+        res.redirect(page.redirect);
+        return;
+      }
 
-    if (page.redirect) {
-      res.redirect(page.redirect);
-      return;
-    }
-
-    res.send(index(page));
-  });
+      res.send(index(page));
+    })
+    .catch(e => console.log(e));
 });
 
 const roll = file =>

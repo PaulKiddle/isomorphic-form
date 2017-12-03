@@ -8,6 +8,10 @@ const closest = (el, elName) => {
 
 export default function collect(form, submitter) {
   const data = new Query();
+  const encType = submitter.formEnctype || form.enctype;
+  const method = submitter.formMethod || form.method;
+  const getFile = file =>
+    method === "post" && encType === "multipart/form-data" ? file : file.name;
 
   for (let field of form.elements) {
     if (
@@ -39,7 +43,9 @@ export default function collect(form, submitter) {
       data.append(name, field.value || "on");
     } else if (type === "file") {
       if (field.files.length) {
-        field.files.forEach(file => data.append(name, file));
+        Array.from(field.files).forEach(file =>
+          data.append(name, getFile(file))
+        );
       } else {
         data.append(name, "");
       }
