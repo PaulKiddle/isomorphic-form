@@ -18,7 +18,7 @@ const { document, window, HTMLFormElement } = new JSDOM(
 global.document = document;
 global.Event = window.Event;
 
-glob("**/*.test.js", { ignore: "node_modules/**" }, (err, files) => {
+glob("src/**/*.test.js", {}, (err, files) => {
   if (err) {
     console.log(err);
     process.exit(1);

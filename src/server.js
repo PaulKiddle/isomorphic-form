@@ -1,4 +1,4 @@
-import Bucket from "./index";
+import FormData from "./form-data";
 const Busboy = require("busboy");
 const Url = require("url");
 const File = require("file-api").File;
@@ -7,9 +7,9 @@ const { PassThrough } = require("stream");
 export default req => {
   if (req.method === "GET") {
     const { query } = Url.parse(req.url);
-    return Promise.resolve(query ? Bucket.fromString(query) : new Bucket());
+    return Promise.resolve(query ? FormData.fromString(query) : new FormData());
   } else if (req.method === "POST") {
-    const bucket = new Bucket();
+    const bucket = new FormData();
     const busboy = new Busboy({ headers: req.headers });
     const promise = new Promise(resolve =>
       busboy.on("finish", () => {

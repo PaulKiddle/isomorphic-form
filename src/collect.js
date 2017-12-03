@@ -1,4 +1,4 @@
-import Query from "./index";
+import FormData from "./form-data";
 
 const isButton = el => /^button|submit|image$/.test(el.type);
 const closest = (el, elName) => {
@@ -6,8 +6,8 @@ const closest = (el, elName) => {
   return el;
 };
 
-export default function collect(form, submitter) {
-  const data = new Query();
+export default function collect(form, submitter = {}) {
+  const data = new FormData();
   const encType = submitter.formEnctype || form.enctype;
   const method = submitter.formMethod || form.method;
   const getFile = file =>

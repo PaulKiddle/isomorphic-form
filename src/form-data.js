@@ -2,7 +2,7 @@ const hasKey = key => ([k]) => k === key;
 const notKey = key => ([k]) => k !== key;
 const hasPair = (key, val) => ([k, v]) => k === key && v == val;
 
-export default class Query {
+export default class FormData {
   constructor(fields = []) {
     if (Array.isArray(fields)) {
       this.fields = fields;
@@ -10,15 +10,15 @@ export default class Query {
     }
 
     if (typeof fields === "string") {
-      return Query.fromString(fields);
+      return FormData.fromString(fields);
     }
 
     if (typeof fields === "object") {
-      return Query.fromObject(fields);
+      return FormData.fromObject(fields);
     }
 
     throw new TypeError(
-      `Query expects array, string or object, not ${typeof fields}`
+      `FormData expects array, string or object, not ${typeof fields}`
     );
   }
 
@@ -27,11 +27,11 @@ export default class Query {
       .replace(/^\?/, "")
       .split("&")
       .map(seg => seg.split("=").map(decodeURIComponent));
-    return new Query(fields);
+    return new FormData(fields);
   }
 
   static fromObject(object) {
-    return new Query(Object.entries(object));
+    return new FormData(Object.entries(object));
   }
 
   append(key, value) {

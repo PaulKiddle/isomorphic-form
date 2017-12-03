@@ -1,5 +1,5 @@
 import router from "./router";
-import FormData from "../index";
+import FormData from "../src/form-data";
 
 window.addEventListener("popstate", e => {
   const state = e.state || {};

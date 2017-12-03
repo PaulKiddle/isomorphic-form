@@ -1,4 +1,4 @@
-import parse from "../server";
+import parse from "../src/server";
 import resolve from "./router";
 import index from "./templates/index";
 
@@ -44,11 +44,11 @@ app.use("/client.js", (req, res) => {
 });
 
 app.use("/form.js", (req, res) => {
-  roll("../form").then(code => {
+  roll("../src/form").then(code => {
     res.send(
       code +
         `
-      form()(document.forms[0])`
+      srcform()(document.forms[0])`
     );
   });
 });
