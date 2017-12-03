@@ -3,10 +3,15 @@ const historyCb = (data, method, action) => {
     return false;
   }
 
-  if (method === "POST") {
-    history.pushState({ method: "POST", body: data }, "", action.toString());
-  } else {
+  const state =
+    method === "post" ? { method: "POST", body: data.toJSON() } : {};
+  if (method === "get") {
     action.search = data.toString();
-    history.pushState({}, "", action.toString());
   }
+
+  history.pushState(state, "", action.toString());
+
+  window.dispatchEvent(new PopStateEvent("popstate", { state }));
 };
+
+export default historyCb;

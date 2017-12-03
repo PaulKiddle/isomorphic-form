@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "cd example && rollup index.js -f cjs | node",
     "test": "node test | faucet"
   },
   "author": "",
@@ -12,6 +13,7 @@
     "busboy": "^0.2.14"
   },
   "devDependencies": {
+    "express": "^4.16.2",
     "faucet": "0.0.1",
     "jsdom": "^11.5.1",
     "mock-req": "^0.2.0",

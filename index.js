@@ -39,7 +39,8 @@ export default class Query {
   }
 
   get(key) {
-    return this.fields.find(hasKey(key))[1];
+    const entry = this.fields.find(hasKey(key));
+    return entry && entry[1];
   }
 
   getAll(key) {

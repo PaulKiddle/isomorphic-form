@@ -1,6 +1,6 @@
 import submit from "./form";
 
-global.Url = require("url").URL;
+global.URL = require("url").URL;
 
 test("it adds a callback", () => {
   const jcb = jest.fn();
