@@ -6,7 +6,8 @@
   "browser": "src/form.js",
   "scripts": {
     "start": "cd example && rollup index.js -f cjs | node",
-    "test": "node test | faucet"
+    "test": "node test | faucet",
+    "prepare": "./build.sh"
   },
   "author": "Paul Kiddle",
   "license": "ISC",
