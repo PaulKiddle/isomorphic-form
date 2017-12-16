@@ -2,12 +2,10 @@
   "name": "universal-form",
   "version": "0.1.0",
   "description": "Isomorphic HTML form that works on the client and the server",
-  "main": "src/server.js",
-  "browser": "src/form.js",
   "scripts": {
     "start": "cd example && rollup index.js -f cjs | node",
     "test": "node test | faucet",
-    "prepare": "./build.sh"
+    "prepublish": "./build.sh"
   },
   "author": "Paul Kiddle",
   "license": "ISC",
