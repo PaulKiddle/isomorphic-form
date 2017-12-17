@@ -11,12 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "busboy": "^0.2.14",
-    "file-api": "^0.10.4"
+    "jsdom": "^11.5.1"
   },
   "devDependencies": {
     "express": "^4.16.2",
     "faucet": "0.0.1",
-    "jsdom": "^11.5.1",
     "mock-req": "^0.2.0",
     "rollup": "^0.52.0",
     "sinon": "^4.1.2",

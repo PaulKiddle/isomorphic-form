@@ -1,61 +1,22 @@
-import FormData from "./form-data";
+import df from "./form-data-plus";
 
-const isButton = el => /^button|submit|image$/.test(el.type);
-const closest = (el, elName) => {
-  while (el && el.nodeName.toLowerCase() !== elName) el = el.parentNode;
-  return el;
-};
+const FormDataPlus = df(FormData);
 
-export default function collect(form, submitter = {}) {
-  const data = new FormData();
-  const encType = submitter.formEnctype || form.enctype;
-  const method = submitter.formMethod || form.method;
-  const getFile = file =>
-    method === "post" && encType === "multipart/form-data" ? file : file.name;
+export default function collect(
+  form,
+  submitter = null,
+  coords = { x: 0, y: 0 }
+) {
+  const data = new FormDataPlus(form);
 
-  for (let field of form.elements) {
-    if (
-      closest(field, "datalist") ||
-      field.disabled ||
-      (isButton(field) && field !== submitter) ||
-      (/^(radio|checkbox)$/.test(field.type) && !field.checked) ||
-      (field.type !== "image" && !field.name)
-    ) {
-      continue;
-    }
+  if (submitter) {
+    if (submitter.type === "image") {
+      const name = submitter.name ? submitter.name + "." : "";
 
-    let { name, type } = field;
-
-    if (field.nodeName.toLowerCase() === "input" && type === "image") {
-      name = name ? field.name + "." : "";
-      data.append(name + "x", "0");
-      data.append(name + "y", "0");
-      continue;
-    }
-
-    if (/^select-(one|multiple)$/.test(type)) {
-      for (let option of field.options) {
-        if (option.selected && !option.disabled) {
-          data.append(name, option.value);
-        }
-      }
-    } else if (/^(radio|checkbox)$/.test(type)) {
-      data.append(name, field.value || "on");
-    } else if (type === "file") {
-      if (field.files.length) {
-        Array.from(field.files).forEach(file =>
-          data.append(name, getFile(file))
-        );
-      } else {
-        data.append(name, "");
-      }
+      data.append(name + "x", coords.x.toString());
+      data.append(name + "y", coords.y.toString());
     } else {
-      data.append(name, field.value);
-    }
-
-    let dirname;
-    if ((dirname = field.getAttribute("dirname"))) {
-      data.append(dirname, field.dir === "ltr" ? "ltr" : "rtl");
+      data.append(submitter.name, submitter.value);
     }
   }
 

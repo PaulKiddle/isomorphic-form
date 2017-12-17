@@ -26,7 +26,7 @@ test("it adds a callback", () => {
 
   let prevented = dispatchSubmit(form.elements.a);
 
-  expect(jcb).toHaveBeenCalledWith("?a=1&b=2");
+  expect(jcb).toHaveBeenCalledWith("?b=2&a=1");
   expect(prevented).toBe(true);
 
   jcb.mockReset();

@@ -11,12 +11,13 @@ virtualConsole.on("jsdomError", e => {
     console.error(e);
   }
 });
-const { document, window, HTMLFormElement } = new JSDOM(
+const { document, window, HTMLFormElement, Event, FormData } = new JSDOM(
   `<!DOCTYPE html><body></body>`,
   { virtualConsole }
 ).window;
 global.document = document;
 global.Event = window.Event;
+global.FormData = FormData;
 
 glob("src/**/*.test.js", {}, (err, files) => {
   if (err) {
@@ -77,6 +78,18 @@ glob("src/**/*.test.js", {}, (err, files) => {
           };
           eval(code);
         });
+      })
+      .catch(e => {
+        if (e.code === "PARSE_ERROR") {
+          console.log("Error: " + e.message);
+          console.log(e.frame);
+          console.log(
+            "    at " + e.loc.file + ":" + e.loc.line + ":" + e.loc.column
+          );
+        } else {
+          console.log(e.stack);
+        }
+        process.exit(1);
       });
   });
 });

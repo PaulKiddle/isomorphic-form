@@ -1,8 +1,12 @@
-import FormData from "./form-data";
+import fdp from "./form-data-plus";
+
 const Busboy = require("busboy");
 const Url = require("url");
-const File = require("file-api").File;
+const { JSDOM } = require("jsdom");
 const { PassThrough } = require("stream");
+const window = new JSDOM().window;
+const File = window.File;
+const FormData = fdp(window.FormData);
 
 export default req => {
   if (req.method === "GET") {

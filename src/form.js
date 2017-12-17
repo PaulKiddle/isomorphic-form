@@ -5,18 +5,22 @@ export default (callback = history) => form => {
   let submitter = null;
 
   const doCollect = e => {
-    const data = collect(form, submitter);
+    const { left, top } = submitter.getBoundingClientRect();
+    const data = collect(form, submitter, {
+      x: e.clientX - left,
+      y: e.clientY - top
+    });
 
-    if (
-      callback(
-        data,
-        submitter.formMethod || form.method,
-        new URL(
-          submitter.getAttribute("formaction") || form.action,
-          window.location
-        )
-      ) !== false
-    ) {
+    const cbResult = callback(
+      data,
+      submitter.formMethod || form.method,
+      new URL(
+        submitter.getAttribute("formaction") || form.action,
+        window.location
+      )
+    );
+
+    if (cbResult !== false) {
       e.preventDefault();
     }
   };
