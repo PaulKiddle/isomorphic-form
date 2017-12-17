@@ -1,4 +1,4 @@
-# Universal Form
+# Isomorphic Form
 
 Many modern web-apps combine javascript and form controls to process user input
 within the browser. This is all well and good, but what if your code breaks or
@@ -8,7 +8,7 @@ Wouldn't it be great if you could gather your form data either through
 javascript or through traditional form submission, and only write the code to
 process it once?
 
-**Universal Form** takes care of this for you. Once it's set up it will send
+**Isomorphic Form** takes care of this for you. Once it's set up it will send
 submitted form data to your router, and you don't need to care whether that data
 came from an HTTP submission or from a javascript `submit` event.
 
