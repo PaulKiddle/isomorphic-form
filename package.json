@@ -1,5 +1,5 @@
 {
-  "name": "universal-form",
+  "name": "isomorphic-form",
   "version": "0.1.0",
   "description": "Isomorphic HTML form that works on the client and the server",
   "scripts": {
@@ -8,6 +8,9 @@
     "prepublish": "./build.sh"
   },
   "author": "Paul Kiddle",
+  "repository": "neonpaul/isomorphic-form",
+  "main": "dist/server.js",
+  "browser": "dist/form.js",
   "license": "ISC",
   "dependencies": {
     "busboy": "^0.2.14",

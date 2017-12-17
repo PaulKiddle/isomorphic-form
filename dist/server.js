@@ -1,93 +1,47 @@
 'use strict';
 
-const hasKey = key => ([k]) => k === key;
-const notKey = key => ([k]) => k !== key;
-const hasPair = (key, val) => ([k, v]) => k === key && v == val;
+var fdp = FormData =>
+  class extends FormData {
+    static fromString(string) {
+      const fd = new this();
 
-class FormData {
-  constructor(fields = []) {
-    if (Array.isArray(fields)) {
-      this.fields = fields;
-      return;
+      const fields = string
+        .replace(/^\?/, "")
+        .split("&")
+        .map(seg => seg.split("=").map(decodeURIComponent));
+
+      fields.forEach(([key, value]) => {
+        fd.append(key, value);
+      });
+
+      return fd;
     }
 
-    if (typeof fields === "string") {
-      return FormData.fromString(fields);
+    constructor(form) {
+      super(form);
     }
 
-    if (typeof fields === "object") {
-      return FormData.fromObject(fields);
+    toJSON(fd) {
+      return Array.from(this.entries());
     }
 
-    throw new TypeError(
-      `FormData expects array, string or object, not ${typeof fields}`
-    );
-  }
-
-  static fromString(string) {
-    const fields = string
-      .replace(/^\?/, "")
-      .split("&")
-      .map(seg => seg.split("=").map(decodeURIComponent));
-    return new FormData(fields);
-  }
-
-  static fromObject(object) {
-    return new FormData(Object.entries(object));
-  }
-
-  append(key, value) {
-    this.fields.push([key, value]);
-  }
-
-  get(key) {
-    const entry = this.fields.find(hasKey(key));
-    return entry && entry[1];
-  }
-
-  getAll(key) {
-    return this.fields.filter(hasKey(key)).map(f => f[0]);
-  }
-
-  delete(key) {
-    this.fields = this.fields.filter(notKey(key));
-  }
-
-  entries() {
-    return this.fields.entries();
-  }
-
-  has(key, value) {
-    return this.fields.some(hasPair(key, value));
-  }
-
-  set(key, [...values]) {
-    this.delete(key);
-    this.fields.concat(values.map(v => [key, v]));
-  }
-
-  [Symbol.iterator]() {
-    return this.fields[Symbol.iterator]();
-  }
-
-  toString() {
-    return (
-      "?" +
-      this.fields
-        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
-        .join("&")
-    );
-  }
-
-  toJSON() {
-    return this.fields;
-  }
-}
+    toString(fd) {
+      return (
+        "?" +
+        this.toJSON()
+          .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+          .join("&")
+      );
+    }
+  };
 
 const Busboy = require("busboy");
 const Url = require("url");
-const File = require("file-api").File;
+const { JSDOM } = require("jsdom");
 const { PassThrough } = require("stream");
+const window = new JSDOM().window;
+const File = window.File;
+const FormData = fdp(window.FormData);
 
 var server = req => {
   if (req.method === "GET") {
