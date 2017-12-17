@@ -49,6 +49,10 @@ string in case you want to do something like append it to a url. It also has a
 On the server, FormData is from JSDOM. On the client it's the native
 implementation.
 
+```bash
+npm install --save isomorphic-form
+```
+
 ### In the browser
 
 ```javascript
